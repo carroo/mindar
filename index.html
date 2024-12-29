@@ -1,49 +1,80 @@
 <html>
-
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
 
-    <script>
-        AFRAME.registerComponent('mytarget', {
-            init: function () {
-                this.el.addEventListener('targetFound', event => {
-                    console.log("target found");
-                    document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-mp4");
-                    document.querySelector("#paintandquest-video-mp4").play();
-                });
-                this.el.addEventListener('targetLost', event => {
-                    console.log("target found");
-                    document.querySelector("#paintandquest-video-mp4").pause();
-                });
-            }
+  <script>
+    AFRAME.registerComponent('mytarget', {
+      schema: {
+        targetIndex: { type: 'int' },
+        videoId: { type: 'string' }
+      },
+      init: function () {
+        this.el.addEventListener('targetFound', event => {
+          console.log(`Target ${this.data.targetIndex} found`);
+          document.querySelector(`#video-link${this.data.targetIndex}`).setAttribute("src", `#video-mp${this.data.targetIndex}`);
+          document.querySelector(`#video-mp${this.data.targetIndex}`).play();
         });
-        
-    </script>
-
+        this.el.addEventListener('targetLost', event => {
+          console.log(`Target ${this.data.targetIndex} lost`);
+          document.querySelector(`#video-mp${this.data.targetIndex}`).pause();
+        });
+      }
+    });
+  </script>
 </head>
 
 <body>
-    <div class="example-container">
-        <a-scene mindar-image="imageTargetSrc: catur.mind; showStats: false;" embedded color-space="sRGB"
-            renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
-            device-orientation-permission-ui="enabled: false">
-            <a-assets>
-                <video id="paintandquest-video-mp4" autoplay="false" loop="true" src="vid.mp4"></video>
-            </a-assets>
+  <div class="example-container">
+    <a-scene mindar-image="imageTargetSrc: targets.mind; showStats: false;filterMinCF:0.1; filterBeta: 10 " embedded color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false">
+      <a-assets>
+        <!-- Define all video assets here -->
+        <video id="video-mp1" autoplay="false" loop="true" src="lmi.mp4"></video>
+        <video id="video-mp2" autoplay="false" loop="true" src="avenger.mp4"></video>
+        <!-- Add more video elements as needed -->
+        <video id="video-mp3" autoplay="false" loop="true" src="drstrange.mp4"></video>
+        <video id="video-mp4" autoplay="false" loop="true" src="naruto.mp4"></video>
+        <video id="video-mp5" autoplay="false" loop="true" src="kny.mp4"></video>
+        <video id="video-mp6" autoplay="false" loop="true" src="jjk.mp4"></video>
+        <video id="video-mp7" autoplay="false" loop="true" src="catur.mp4"></video>
+      </a-assets>
 
-            <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
-                raycaster="far: 10000; objects: .clickable">
-            </a-camera>
+      <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
+        raycaster="far: 10000; objects: .clickable">
+      </a-camera>
 
-            <a-entity id="mytarget" mytarget mindar-image-target="targetIndex: 0">
-                <a-video id="paintandquest-video-link" webkit-playsinline playsinline width="1" height="1"
-                    position="0 0 0.2"></a-video>
-            </a-entity>
-        </a-scene>
-    </div>
+      <!-- Define entities with different targetIndex values -->
+      <a-entity id="mytarget1" mytarget="targetIndex: 1; videoId: video-link1" mindar-image-target="targetIndex: 0">
+        <a-video id="video-link1" webkit-playsinline playsinline width="1" height="1" position="0 0 0.2"></a-video>
+      </a-entity>
+
+      <a-entity id="mytarget2" mytarget="targetIndex: 2; videoId: video-link2" mindar-image-target="targetIndex: 1">
+        <a-video id="video-link2" webkit-playsinline playsinline width="1" height="1" position="0 0 0.2"></a-video>
+      </a-entity>
+
+      <a-entity id="mytarget3" mytarget="targetIndex: 3; videoId: video-link3" mindar-image-target="targetIndex: 2">
+        <a-video id="video-link3" webkit-playsinline playsinline width="1" height="1" position="0 0 0.2"></a-video>
+      </a-entity>
+
+      <a-entity id="mytarget4" mytarget="targetIndex: 4; videoId: video-link4" mindar-image-target="targetIndex: 3">
+        <a-video id="video-link4" webkit-playsinline playsinline width="1" height="1" position="0 0 0.2"></a-video>
+      </a-entity>
+      <a-entity id="mytarget5" mytarget="targetIndex: 5; videoId: video-link5" mindar-image-target="targetIndex: 4">
+        <a-video id="video-link5" webkit-playsinline playsinline width="1" height="1" position="0 0 0.2"></a-video>
+      </a-entity>
+      <a-entity id="mytarget6" mytarget="targetIndex: 6; videoId: video-link6" mindar-image-target="targetIndex: 5">
+        <a-video id="video-link6" webkit-playsinline playsinline width="1" height="1" position="0 0 0.2"></a-video>
+      </a-entity>
+      <a-entity id="mytarget7" mytarget="targetIndex: 7; videoId: video-link7" mindar-image-target="targetIndex: 6">
+        <a-video id="video-link7" webkit-playsinline playsinline width="1" height="1" position="0 0 0.2"></a-video>
+      </a-entity>
+
+
+    </a-scene>
+  </div>
 </body>
-
 </html>
