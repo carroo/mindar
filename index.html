@@ -2,9 +2,8 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
-
+   <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="assets/ar.js"></script>
   <script>
     AFRAME.registerComponent('mytarget', {
       schema: {
@@ -28,7 +27,7 @@
 
 <body>
   <div class="example-container">
-    <a-scene mindar-image="imageTargetSrc: targets.mind; showStats: false; filterMinCF:0.1; filterBeta:70;" embedded color-space="sRGB"
+    <a-scene mindar-image="imageTargetSrc: targets.mind; showStats: false; " embedded color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false">
       <a-assets>
