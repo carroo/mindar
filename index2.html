@@ -5,6 +5,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <script src="assets/ar.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
 
   <script>
     const showInfo = () => {
@@ -73,21 +74,20 @@
         if (y >= 0.6) {
           clearInterval(id);
           document.querySelector("#video-mp4").play();
-          const rotationId = setInterval(() => {
-            rotationY += 1; // Tingkatkan rotasi sebesar 1 derajat
-            if (rotationY >= 30) {
-              clearInterval(rotationId);
-              console.log("Rotasi selesai");
-            }
-            portfolio.setAttribute("rotation", `0 ${rotationY} 0`);
-          }, 10);
-
 
           setTimeout(() => {
             done();
           }, 500);
         }
         portfolio.setAttribute("position", "0 " + y + " -0.01");
+      }, 10);
+      const rotationId = setInterval(() => {
+        rotationX += 1; // Tingkatkan rotasi sebesar 1 derajat
+        if (rotationX >= 60) {
+          clearInterval(rotationId);
+          console.log("Rotasi selesai");
+        }
+        document.querySelector("#video-mp4").setAttribute("rotation", `${rotationx} 0 0`);
       }, 10);
     }
     AFRAME.registerComponent('mytarget', {
@@ -231,6 +231,8 @@
         <img id="icon-instagram" src="assets/icon/instagram-color.svg" />
         <img id="icon-email" src="assets/icon/gmail-color.svg" />
         <video id="video-mp4" autoplay="false" loop="true" src="assets/porto.mp4"></video>
+
+        <a-asset-item id="avatarModel" src="assets/animasi/avacado.glb"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
@@ -240,7 +242,8 @@
       <a-entity id="mytarget" mytarget mindar-image-target="targetIndex: 0">
 
         <a-entity visible=false id="portfolio-panel" position="0 0 -0.01">
-          <a-video id="video-link" webkit-playsinline playsinline width="1" height="0.5" position="0 0 0"></a-video>
+          <a-video id="video-link" webkit-playsinline playsinline width="1" rotation="0 0 0" height="0.5"
+            position="0 0 0"></a-video>
         </a-entity>
 
         <a-image visible=false id="instagram-button" class="clickable" src="#icon-instagram" position="-0.42 -0.5 0"
@@ -258,9 +261,10 @@
         <a-image visible=false id="whatsapp-button" class="clickable" src="#icon-whatsapp" position="0.42 -0.5 0"
           height="0.15" width="0.15"
           animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"></a-image>
-        <a-text id="text" class="clickable" value="" color="black" align="center" width="1" position="0 -0.8 0"
-          geometry="primitive:plane; height: 0.1; width: 2;" material="opacity: 0.5"></a-text>
-
+        <a-text id="text" class="clickable" value="Hai!!" color="black" align="center" width="1" position="0 -0.8 0"
+          geometry="primitive:plane; height: 0.1; width: 1;" material="opacity: 0.5"></a-text>
+        <a-gltf-model  id="avatar" rotation="180 90 90" position="0.35 0 0"
+          scale="0.0018 0.0018 0.0018" src="#avatarModel" animation-mixer></a-gltf-model>
       </a-entity>
     </a-scene>
   </div>
