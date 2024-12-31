@@ -27,12 +27,13 @@
 
 <body>
   <div class="example-container">
-    <a-scene mindar-image="imageTargetSrc: targets.mind; showStats: false; " embedded color-space="sRGB"
-      renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
+    <a-scene
+      mindar-image="imageTargetSrc: assets/scane/targets.mind; showStats: false;"
+      embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false">
       <a-assets>
         <!-- Define all video assets here -->
-        <video id="video-mp1" autoplay="false" loop="true" src="lmi.mp4"></video>
+        <video id="video-mp1" autoplay="false" loop="true" src="memories.mp4"></video>
         <video id="video-mp2" autoplay="false" loop="true" src="avenger.mp4"></video>
         <!-- Add more video elements as needed -->
         <video id="video-mp3" autoplay="false" loop="true" src="drstrange.mp4"></video>
